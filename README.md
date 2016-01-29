@@ -1,9 +1,9 @@
 # dtm-cheat-sheet
 Code snippets for processing and analysing marine DTM datasets
 
-This workflow requires a gridded 3 column XYZ file.
+This workflow requires a standard 3-column gridded XYZ file.
 
-*2m gridded XYZ file example:*
+*2m standard 3-column gridded XYZ file example:*
 
 ```
 408825.00 5694465.00 -33.759000
@@ -28,7 +28,7 @@ Check the resolution of the XYZ file in a text editor, if the XYZ file is too bi
 
 Run `gmtinfo` and pipe  the output dimensions of the input XYZ grid to a text file
 
-`gmtinfo input.xyz -I1 > dimensions.txt`
+`gmtinfo input.xyz -I2 > dimensions.txt`
 
 - where `-I` is cell size of the XYZ file eg. 1m x 1m
 
@@ -36,17 +36,19 @@ Run `gmtinfo` and pipe  the output dimensions of the input XYZ grid to a text fi
 
 Use `xyz2grd` to convert a standard 3-column gridded XYZ to GeoTIFF
 
-`xyz2grd -R0/1162/0/1246 -I2 -Goutput.tif=gd:GTiff input.xyz`
+`xyz2grd -R399073.9/409593.9/5694455.6/5702819.6 -I2 -Goutput.tif=gd:GTiff input.xyz`
 
 - where `-R` are the output grid dimensions from `gmtinfo`
 
 - where `-I` is cell size of the XYZ file
 
-- where `-G` is output file name of the GeoTiff
+- where `-G` is output file name of the GeoTiff. Use the suffix `=gd:GTiff` to force the output to a GeoTiff. Default output file format is netCDF.
 
 Note |  for sub metre resolution, eg. `-I0.1` for 10cm cell size
 
 #### Invert Z column from positive to negative values
+
+If your input XYZ has the Z value in positive depths as opposed to negative elevation you can invert using `grdmath`
 
 `grdmath input.tif=gd:GTiff -1 MUL = output.tif=gd:GTiff`
 
@@ -76,7 +78,7 @@ Use `gdal_translate` to apply the coordinate reference system and high compressi
 
 `gdaldem color-relief bathy_merged.tif hillshade_colours.txt color-relief.tif -alpha -nearest_color_entry`
 
-##### Format for color-relief input file
+###### Format for color-relief input file
 - Delimited file (comma, tab or space)
 - Four columns | elevation, Red, Green, Blue
 
@@ -128,3 +130,9 @@ To select all values in input raster. Set the logic test to be `A>-100` (all val
 Polygonise the resulting integer tiff to a shape file
 
 `gdal_polygonize.bat myinteger.tif -f "ESRI Shapefile" output.shp`
+
+#### Convert GeoTiff to standard 3-column gridded XYZ file
+
+`grd2xyz -s input.tif > output.xyz`
+
+* use `-s` to suppress output for records whose z-value equals NaN [Default outputs all records]
