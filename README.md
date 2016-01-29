@@ -22,7 +22,7 @@ Required tools for installation:
 
 ## WINDOWS
 
-Check the resolution of the XYZ file in a text editor, if the XYZ file is too big to be opened by a text editor then open via the command prompt
+Check the resolution of the XYZ file in a text editor, if the XYZ file is too big to be opened by a text editor then open via the Windows command prompt.
 
 `more input.xyz`
 
@@ -44,7 +44,11 @@ Use `xyz2grd` to convert a standard 3-column gridded XYZ to GeoTIFF
 
 - where `-G` is output file name of the GeoTiff
 
-Note |  use `-I0.1` for 10cm resolution
+Note |  for sub metre resolution, eg. `-I0.1` for 10cm cell size
+
+#### Invert Z column from positive to negative values
+
+`grdmath input.tif=gd:GTiff -1 MUL = output.tif=gd:GTiff`
 
 #### Apply CRS & Compression
 
@@ -52,9 +56,17 @@ Use `gdal_translate` to apply the coordinate reference system and high compressi
 
 `gdal_translate -a_srs EPSG:23031 -co COMPRESS=DEFLATE -co PREDICTOR=2 -co ZLEVEL=9 input.tif output.tif`
 
+- use `-a_srs` to overide projection, recommend using [www.epsg.io](www.epsg.io)
+
+- use `-co` to apply compression when creating the output GeoTiff
+
 #### Generate Hillshade
 
 `gdaldem hillshade input.tif output_hillshade.tif -z [Zfactor] -az [Azimuth (default 315)] -alt [altitude (default 45)]`
+
+- where `-z` is the vertical exaggeration or Zfactor
+- where `-az` is the azimuth angle in degrees
+- where `-alt` is the altitude of the light, in degrees
 
 #### Generate Seabed Gradient
 
@@ -66,8 +78,7 @@ Use `gdal_translate` to apply the coordinate reference system and high compressi
 
 ##### Format for color-relief input file
 - Delimited file (comma, tab or space)
-- Four columns
-- Elevation, Red, Green, Blue
+- Four columns | elevation, Red, Green, Blue
 
 You can use common colours as used in [GRASS](https://grass.osgeo.org/grass64/manuals/r.colors.html) instead of RGB values.
 
@@ -98,6 +109,7 @@ http://www.gdal.org/gdaldem.html for more info
 `gdal_contour -a elev -i 1 input.tif output.shp`
 
 - where `-a` provides the attribute name for the elevation
+
 - where `-i` is the elevation interval between contours
 
 #### Creating Hillshade Relief Images
