@@ -30,7 +30,15 @@ Run `gmtinfo` and pipe  the output dimensions of the input XYZ grid to a text fi
 
 `gmtinfo input.xyz -I2 > dimensions.txt`
 
-- where `-I` is cell size of the XYZ file eg. 1m x 1m
+- where `-I` is cell size of the XYZ file eg. 2x2m
+
+Ascertain Z range of the input XYZ file
+
+`gmtinfo -C -o4,5 input.xyz`
+
+- where `-C` reports the min/max values per column in seperate columns
+
+- where `-o` limits the output columns reported. `4,5` report the min/max for the 3rd column (Z column)
 
 #### Convert XYZ to GeoTIFF
 
@@ -64,7 +72,7 @@ Use `gdal_translate` to apply the coordinate reference system and high compressi
 
 #### Generate Hillshade
 
-`gdaldem hillshade input.tif output_hillshade.tif -z [Zfactor] -az [Azimuth (default 315)] -alt [altitude (default 45)]`
+`gdaldem hillshade input.tif output_hillshade.tif -z [Zfactor (default 1)] -az [Azimuth (default 315)] -alt [altitude (default 45)]`
 
 - where `-z` is the vertical exaggeration or Zfactor
 - where `-az` is the azimuth angle in degrees
@@ -76,9 +84,9 @@ Use `gdal_translate` to apply the coordinate reference system and high compressi
 
 #### Generate color-relief
 
-`gdaldem color-relief bathy_merged.tif hillshade_colours.txt color-relief.tif -alpha -nearest_color_entry`
+`gdaldem color-relief bathy_merged.tif color-relief-ramp.txt color-relief.tif -alpha -nearest_color_entry`
 
-###### Format for color-relief input file
+###### Format for color-relief-ramp input file
 - Delimited file (comma, tab or space)
 - Four columns | elevation, Red, Green, Blue
 
@@ -87,22 +95,34 @@ You can use common colours as used in [GRASS](https://grass.osgeo.org/grass64/ma
 Example #1 hardcoded water depth break values, with associated RGB colour
 
 ```
-0 0 0 0
--14.2290 182 0 208
--16.0592 134 0 209
--17.8894 80 0 211
--19.7196 25 0 213
--21.5498 1 30 215
+nv 255 255 255
+-44.302 0 0 0
+-41.06 29 43 53
+-37.818 37 44 95
+-34.576 63 70 134
+-31.334 89 112 147
+-28.092 87 124 143
+-24.850 117 160 125
+-21.608 188 219 173
+-18.366 239 253 163
+-15.124 222 214 67
+-11.882 189 138 55
 ```
 
 Example #2 Can also use percentages: 0% minimum > 100% maximum value in raster
 ```
+nv 255 255 255
 0% 0 0 0
-20% 182 0 208
-40% 134 0 209
-60% 80 0 211
-80% 25 0 213
-100% 1 30 215
+10% 29 43 53
+20% 37 44 95
+30% 63 70 134
+40% 89 112 147
+50% 87 124 143
+60% 117 160 125
+70% 188 219 173
+80% 239 253 163
+90% 222 214 67
+100% 189 138 55
 ```
 http://www.gdal.org/gdaldem.html for more info
 
