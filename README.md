@@ -22,6 +22,8 @@ Required tools for installation:
 
 ## WINDOWS
 
+#### Analyse XYZ
+
 Check the resolution of the XYZ file in a text editor, if the XYZ file is too big to be opened by a text editor then open via the Windows command prompt.
 
 `more input.xyz`
