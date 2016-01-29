@@ -84,7 +84,7 @@ Use `gdal_translate` to apply the coordinate reference system and high compressi
 
 `gdaldem slope input.tif output_slope.tif`
 
-#### Generate color-relief
+#### Generate Color-relief
 
 `gdaldem color-relief bathy_merged.tif color-relief-ramp.txt color-relief.tif -alpha -nearest_color_entry`
 
@@ -142,7 +142,7 @@ http://www.gdal.org/gdaldem.html for more info
 
 Method #1 | You can use Frank Warmerdam [hsv_merge.py](http://svn.osgeo.org/gdal/trunk/gdal/swig/python/samples/hsv_merge.py) script
 
-`hsv_merge.py color-relief.tif hillshade.tif output.tif`
+`python hsv_merge.py color-relief.tif hillshade.tif output.tif`
 
 #### Create a polygon coverage shapefile of a raster area
 To select all values in input raster. Set the logic test to be `A>-100` (all values are > -100) and set them to equal an integer i.e. 1
