@@ -1,10 +1,10 @@
 # dtm-cheat-sheet
-Code snippets for processing and analysing marine DTM datasets
 
-This workflow requires a standard 3-column gridded XYZ file.
+## Introduction
 
+This is a cheat-sheet for various code snippets to assist with processing and analysing marine digital terrain model (DTM) bathymetric datasets.  
+In the marine sector(s), a common filetype for a bathymetric DTM is the 3-column gridded XYZ file, following the structure below. Note, in marine gridded XYZ, it is common to _not_ include `no data` values within the XYZ file. Because of this, there can be issues with using the XYZ driver in GDAL/OGR. However, `gmt` seems to read marine XYZ files consistently.
 *2m standard 3-column gridded XYZ file example:*
-
 ```
 408825.00 5694465.00 -33.759000
 408827.00 5694465.00 -33.778000
@@ -15,10 +15,18 @@ This workflow requires a standard 3-column gridded XYZ file.
 408837.00 5694465.00 -37.705000
 ```
 
-Prerequisite | Command line tools for installation:
+### Prerequisites:
+* The following workflows use a combination of specialist programs, sourced from two software libraries called [GDAL/OGR](http://www.gdal.org/) and  [gmt](http://gmt.soest.hawaii.edu/projects/gmt/wiki/Download).  
+* Each library contains a collection of specific programs designed to do one thing only.
+* For instance, within the `GDAL/OGR` library, there is a specific program called `gdalinfo`. This program interogrates a raster or gridded file and generates a short report on the structure and metadata about that raster file.
+* All programs are executed on the `commandline`, which is also sometimes referred to as the `shell`, `console` or `terminal`.
+* If you're unfamiliar with using commandline programs, the command or program is ususal referenced first, then followed by various input parameters. Input parameters can be mandatory or optional, depending on the particular program.
 
-- [OSGeo4W](https://trac.osgeo.org/osgeo4w/)
-- [Generic Mapping Tools (GMT)](http://gmt.soest.hawaii.edu/projects/gmt/wiki/Download)
+### Installation of `gmt`
+* provide link to installation instructions
+ 
+### Installation of `GDAL/OGR`
+* provide link to install instructions
 
 ## WINDOWS
 
