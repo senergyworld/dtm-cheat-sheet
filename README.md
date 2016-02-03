@@ -2,8 +2,7 @@
 
 ## Introduction
 
-This is a cheat-sheet for various code snippets to assist with processing and analysing marine digital terrain model (DTM) bathymetric datasets.  
-In the marine sector(s), a common filetype for a bathymetric DTM is the 3-column gridded XYZ file, following the structure below. Note, in marine gridded XYZ, it is common to _not_ include `no data` values within the XYZ file. Because of this, there can be issues with using the XYZ driver in GDAL/OGR. However, `gmt` seems to read marine XYZ files consistently.
+This is a cheat-sheet for various code snippets to assist with processing and analysing marine digital terrain model (DTM) bathymetric datasets. In the marine sector(s), a common filetype for a bathymetric DTM is the 3-column gridded XYZ file, following the structure below. Note, in marine gridded XYZ, it is common to _not_ include `no data` values within the XYZ file. Because of this, there can be issues with using the XYZ driver in GDAL/OGR. However, `gmt` seems to read marine XYZ files consistently.  
 *2m standard 3-column gridded XYZ file example:*
 ```
 408825.00 5694465.00 -33.759000
