@@ -35,7 +35,9 @@ Run the following commands via the `OSGeo4W Shell` commonly found here `C:\OSGeo
 
 Check the resolution of the XYZ file in a text editor, if the XYZ file is too big to be opened by a text editor then open via the Windows command prompt.
 
-`more input.xyz`
+```
+more input.xyz
+```
 
 Run `gmtinfo` and pipe  the output dimensions of the input XYZ grid to a text file
 
