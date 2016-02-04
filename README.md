@@ -40,11 +40,12 @@ more input.xyz
 ```
 
 Run `gmtinfo` and pipe  the output dimensions of the input XYZ grid to a text file
-
 ```
 gmtinfo input.xyz -I2 > dimensions.txt
 ```
-- where `-I` is the cell size of the XYZ file, eg `-I2` for a 2x2m cell size
+ * where `-I` is the cell size of the XYZ file, eg `-I2` for a 2x2m cell size
+
+
 
 Ascertain Z range of the input XYZ file:
 
@@ -57,20 +58,14 @@ gmtinfo -C -o4,5 input.xyz
 - where `-o` limits the output columns reported. `4,5` report the min/max for the 3rd column (Z column)
 
 #### Convert XYZ to GeoTIFF
-
-Use `gmt` `xyz2grd` to convert a standard 3-column gridded XYZ to GeoTIFF
-
+ * Use `gmt` `xyz2grd` to convert a standard 3-column gridded XYZ to GeoTIFF
 ```
 xyz2grd -R399073.9/409593.9/5694455.6/5702819.6 -I2 -Goutput.tif=gd:GTiff input.xyz
 ```
-
-- where `-R` are the output grid dimensions from `gmtinfo`
-
-- where `-I` is the cell size of the XYZ file, eg `-I2` for a 2x2m cell size
-
-- where `-G` is output file name of the GeoTiff. Use the suffix `=gd:GTiff` to force the output to a GeoTiff. Default output file format is netCDF.
-
-Note | Use decimals for sub metre resolution, eg. `-I0.1` for 10cm cell size
+ * where `-R` are the output grid dimensions from `gmtinfo`
+ * where `-I` is the cell size of the XYZ file, eg `-I2` for a 2x2m cell size
+ * where `-G` is output file name of the GeoTiff. Use the suffix `=gd:GTiff` to force the output to a GeoTiff. Default output file format is netCDF.
+* Note | Use decimals for sub metre resolution, eg. `-I0.1` for 10cm cell size
 
 #### Invert Z column from positive to negative values
 
