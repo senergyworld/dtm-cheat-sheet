@@ -41,13 +41,16 @@ more input.xyz
 
 Run `gmtinfo` and pipe  the output dimensions of the input XYZ grid to a text file
 
-`gmtinfo input.xyz -I2 > dimensions.txt`
-
+```
+gmtinfo input.xyz -I2 > dimensions.txt
+```
 - where `-I` is the cell size of the XYZ file, eg `-I2` for a 2x2m cell size
 
 Ascertain Z range of the input XYZ file:
 
-`gmtinfo -C -o4,5 input.xyz`
+```
+gmtinfo -C -o4,5 input.xyz
+```
 
 - where `-C` reports the min/max values per column, eg (X,Y and Z)
 
@@ -57,7 +60,9 @@ Ascertain Z range of the input XYZ file:
 
 Use `gmt` `xyz2grd` to convert a standard 3-column gridded XYZ to GeoTIFF
 
-`xyz2grd -R399073.9/409593.9/5694455.6/5702819.6 -I2 -Goutput.tif=gd:GTiff input.xyz`
+```
+xyz2grd -R399073.9/409593.9/5694455.6/5702819.6 -I2 -Goutput.tif=gd:GTiff input.xyz
+```
 
 - where `-R` are the output grid dimensions from `gmtinfo`
 
