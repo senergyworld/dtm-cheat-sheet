@@ -214,7 +214,7 @@ set CELLSIZE=2
 
 xyz2grd %MINMAXVAR% -I%CELLSIZE% -G%DATASET%.tif=gd:GTiff %DATASET%.xyz
 ```
-* Be sure to edit the batch with correct `CELLSIZE` value
+* Be sure to edit the batch file with the correct `CELLSIZE` value
 * Note | all input `.xyz` files must have the same cell size
 
 To run the batch file `cd` into your working directory
