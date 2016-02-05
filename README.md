@@ -222,7 +222,7 @@ To run the batch file `cd` into your working directory
 ```
 for %f in (*.xyz) do batch_processing.cmd %~nf
 ```
-* `%f` is the argument used for each xyz file in a folder during the `FOR` loop
+* `%f` is the argument used for each XYZ file in a folder during the `FOR` loop
 * `%~nf` is the basename for each XYZ file eg `input_bathymetry.xyz` becomes `input_bathymetry`
 * `%~nf` is the argument which gets fed into the batch file as `%1` which is then set to `%DATASET%`
-* If the input xyz files are `.txt` adjust `(*.xyz)` to `(*.txt)`
+* If the input XYZ files are `.txt` adjust `(*.xyz)` to `(*.txt)`
