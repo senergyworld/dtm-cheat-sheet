@@ -198,11 +198,11 @@ grd2xyz -s input_bathymetry.tif > output_grd2xyz_bathymetry.xyz
 ```
 * use `-s` to suppress output for records whose z-value equals NaN [Default outputs all records]
 
-### Batch Processing:
+### Batch Processing
 
 - Create a Windows batch file `batch_processing.cmd`  in your working directory alongside your input `.xyz` files.
 
-Batch file format:
+Batch file format
 
 ```
 set DATASET=%1
