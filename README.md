@@ -197,3 +197,32 @@ gdal_polygonize.bat myinteger.tif -f "ESRI Shapefile" output_bathymetry_coverage
 grd2xyz -s input_bathymetry.tif > output_grd2xyz_bathymetry.xyz
 ```
 * use `-s` to suppress output for records whose z-value equals NaN [Default outputs all records]
+
+### Batch Processing:
+
+- Create a Windows batch file `batch_processing.cmd`  in your working directory alongside your input `.xyz` files.
+
+Batch file format:
+
+```
+set DATASET=%1
+set CELLSIZE=2
+
+@FOR /F "tokens=* USEBACKQ" %%F IN (`gmtinfo %DATASET%.xyz -I%CELLSIZE%`) DO (
+@SET minmaxvar=%%F
+)
+
+xyz2grd %MINMAXVAR% -I%CELLSIZE% -G%DATASET%.tif=gd:GTiff %DATASET%.xyz
+```
+* Be sure to edit the batch with correct `CELLSIZE` value
+* Note | all input `.xyz` files must have the same cell size
+
+To run the batch file `cd` into your working directory
+
+```
+for %f in (*.xyz) do batch_processing.cmd %~nf
+```
+* `%f` is the argument used for each xyz file in a folder during the `FOR` loop
+* `%~nf` is the basename for each XYZ file eg `input_bathymetry.xyz` becomes `input_bathymetry`
+* `%~nf` is the argument which gets fed into the batch file as `%1` which is then set to `%DATASET%`
+* If the input xyz files are `.txt` adjust `(*.xyz)` to `(*.txt)`
