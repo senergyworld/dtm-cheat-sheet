@@ -198,6 +198,23 @@ grd2xyz -s input_bathymetry.tif > output_grd2xyz_bathymetry.xyz
 ```
 * use `-s` to suppress output for records whose z-value equals NaN [Default outputs all records]
 
+#### Change nodata value from `nan` to an integer 
+```
+gdalwarp input_bathymetry.tif output_bathymetry_nodata_integer.tif -dstnodata -99999
+```
+#### Merge a folder of bathymetry tifs to one single file
+Build a [VRT](http://www.gdal.org/gdalbuildvrt.html) file for all of the tifs in a folder
+```
+gdalbuildvrt bathymetry_tifs.vrt *.tif
+```
+Convert the VRT file to a Geotiff
+```
+gdal_translate -a_srs EPSG:23031 -co COMPRESS=DEFLATE -co PREDICTOR=2 -co ZLEVEL=9 bathymetry_tifs.vrt output_bathymetry_tifs.tif
+````
+- use -a_srs to overide projection, recommend using www.epsg.io
+
+- use -co to apply compression when creating the output GeoTiff. You can use multiple -co options.
+
 ### Batch Processing
 
 - Create a Windows batch file `batch_processing.cmd`  in your working directory alongside your input `.xyz` files.
