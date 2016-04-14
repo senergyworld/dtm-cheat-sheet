@@ -202,12 +202,12 @@ grd2xyz -s input_bathymetry.tif > output_grd2xyz_bathymetry.xyz
 ```
 gdalwarp input_bathymetry.tif output_bathymetry_nodata_integer.tif -dstnodata -99999
 ```
-#### Merge a folder of bathymetry tifs to one single file
+#### Merge a folder of bathymetry GeoTiffs to one single file
 Build a [VRT](http://www.gdal.org/gdalbuildvrt.html) file for all of the tifs in a folder
 ```
 gdalbuildvrt bathymetry_tifs.vrt *.tif
 ```
-Convert the VRT file to a Geotiff
+Convert the VRT file to a GeoTiff
 ```
 gdal_translate -a_srs EPSG:23031 -co COMPRESS=DEFLATE -co PREDICTOR=2 -co ZLEVEL=9 bathymetry_tifs.vrt output_bathymetry_tifs.tif
 ````
