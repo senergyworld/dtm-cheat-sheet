@@ -82,7 +82,7 @@ grdmath input.tif=gd:GTiff -1 MUL = output_inverted.tif=gd:GTiff
 gdal_translate -a_srs EPSG:23031 -co COMPRESS=DEFLATE -co PREDICTOR=2 -co ZLEVEL=9 input_frm_xyz2grd.tif output_bathymetry.tif
 ```
 
-- use `-a_srs` to overide projection, recommend using [www.epsg.io](www.epsg.io)
+- use `-a_srs` to define projection, recommend using [www.epsg.io](www.epsg.io)
 
 - use `-co` to apply compression when creating the output GeoTiff. You can use multiple `-co` options.
 
@@ -211,7 +211,7 @@ Convert the VRT file to a Geotiff
 ```
 gdal_translate -a_srs EPSG:23031 -co COMPRESS=DEFLATE -co PREDICTOR=2 -co ZLEVEL=9 bathymetry_tifs.vrt output_bathymetry_tifs.tif
 ````
-- use -a_srs to overide projection, recommend using www.epsg.io
+- use -a_srs to define projection, recommend using www.epsg.io
 
 - use -co to apply compression when creating the output GeoTiff. You can use multiple -co options.
 
